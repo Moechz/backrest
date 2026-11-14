@@ -1,0 +1,195 @@
+# ===========================================================================
+# Multilingual file for the TOS 7 Docker application "backrestdocker".
+# File name MUST be: <appid>.lang.  23-language superset (14 required by TOS).
+# The App Center picks the text matching the user's device language;
+# untranslated nodes fall back to English, which the official guide allows.
+# Fields: name (app title), auth (upstream author), descript (up to 512
+# chars), release_note, important (up to 512 chars).
+# Translations come from tosapp.json "translations"; run
+#   tosdocker lang <app>          to re-render this file
+#   tosdocker translate <app>     to see what still needs translating
+# ===========================================================================
+[en-us]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[zh-cn]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest 是 restic 的友好网页界面：把 NAS 上的目录加密备份到本地磁盘、S3、SFTP 或其他 restic 后端，支持定时计划、浏览/恢复快照与保留策略，不用手敲 restic 命令。配置与 restic 缓存都保存在应用数据目录。"
+release_note = "1. 首个版本：基于 Docker Hub 的 Backrest 1.14.1，以非 root 容器运行。restic 备份的网页界面，支持计划、快照、恢复与保留策略；配置与缓存在应用数据目录。"
+important    = "需要 DockerEngine（缺失时应用中心会自动安装）。打开界面后添加仓库（路径或 S3/SFTP 地址）和计划；每个仓库设置的密码是恢复时必需的，请妥善保存。配置与缓存保存在 DockerAppData/backrestdocker。备份在 NAS 上执行，目标地址需要可达。界面为纯 HTTP，暴露到公网前请配置带 TLS 的反向代理。"
+
+[zh-hk]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest 是 restic 的友善網頁介面：把 NAS 上的目錄加密備份到本機磁碟、S3、SFTP 或其他 restic 後端，支援定時計畫、瀏覽/還原快照與保留策略，不用手敲 restic 指令。設定與 restic 快取都保存在應用資料目錄。"
+release_note = "1. 首個版本：基於 Docker Hub 的 Backrest 1.14.1，以非 root 容器運行。restic 備份的網頁介面，支援計畫、快照、還原與保留策略；設定與快取在應用資料目錄。"
+important    = "需要 DockerEngine（缺少時應用中心會自動安裝）。開啟介面後新增倉庫（路徑或 S3/SFTP 位址）和計畫；每個倉庫設定的密碼是還原時必需的，請妥善保存。設定與快取保存在 DockerAppData/backrestdocker。備份在 NAS 上執行，目標位址需要可達。介面為純 HTTP，公開到互聯網前請配置帶 TLS 的反向代理。"
+
+[fr-fr]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[de-de]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[it-it]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[es-es]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[hu-hu]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[ja-jp]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[ko-kr]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[pl-pl]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[ru-ru]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[tr-tr]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[pt-pt]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[ar-sa]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[cs-cz]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[he-il]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[id-id]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[nb-no]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[nl-nl]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[sv-se]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[th-th]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+
+[vi-vn]
+name         = "Backrest"
+auth         = "garethgeorge"
+version      = "@@VERSION@@"
+descript     = "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder."
+release_note = "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder."
+important    = "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet."
+

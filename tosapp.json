@@ -1,0 +1,110 @@
+{
+  "app_id": "backrestdocker",
+  "title": "Backrest",
+  "image": "garethgeorge/backrest:v1.14.1",
+  "repo_name": "backrest",
+  "mode": "plain",
+  "container_port": 9898,
+  "category": [
+    "Backup_Sync"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/backrestdocker/config",
+      "container": "/config"
+    },
+    {
+      "host": "/Volume1/DockerAppData/backrestdocker/data",
+      "container": "/data"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "garethgeorge",
+  "upstream_url": "https://github.com/garethgeorge/backrest",
+  "upstream_license": "MIT",
+  "descript": "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder.",
+  "release_note": "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder.",
+  "important": "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet.",
+  "probe": {
+    "user_in_image": "(root)",
+    "entrypoint": [
+      "/sbin/tini",
+      "--",
+      "/docker-entrypoint"
+    ],
+    "cmd": [
+      "/backrest"
+    ],
+    "exposed_ports": [],
+    "declared_volumes": [],
+    "image_healthcheck": [],
+    "digest": "garethgeorge/backrest@sha256:b852979754281026230cc69fb11428e6d57c9a97784ab4a444ffc7934c53a215",
+    "architecture": "x86_64",
+    "platforms": [
+      "x86_64",
+      "aarch64"
+    ],
+    "http_client_in_image": "",
+    "trial_run": {
+      "ok": false,
+      "http_code": "",
+      "state": "exited",
+      "paths": [],
+      "host_port": 18000,
+      "log_tail": "2026-11-14T10:44:40.347Z\t\u001b[31mERROR\u001b[0m\terror creating logs directory, will only log to console for now\t{\"path\": \"/data/processlogs\", \"error\": \"mkdir /data: permission denied\"}\n2026-11-14T10:44:40.369Z\t\u001b[34mINFO\u001b[0m\trestic binary \"/bin/restic\" in $PATH matches required version 0.19.1, it will be used for backrest commands\n2026-11-14T10:44:40.374Z\t\u001b[33mWARN\u001b[0m\toperation log may be corrupted, if errors recur delete the file and restart. Your backups stored in your repos are safe.\t{\"oplog_file\": \"/data/oplog.sqlite\"}\n2026-11-14T10:44:40.374Z\t\u001b[31mFATAL\u001b[0m\terror creating oplog\t{\"error\": \"create sqlite db directory: mkdir /data: permission denied\"}\nSetting docker defaults for env variables:\n - BACKREST_CONFIG=\"/config/config.json\"\n - XDG_CACHE_HOME=\"/cache\"\n - TMPDIR=\"/tmp\"\n - BACKREST_PORT=\"0.0.0.0:9898\"\n - BACKREST_DATA=\"/data\"\nRunning command: /backrest []\nIf you're reading this, you're unnecessarily importing github.com/ncruces/go-sqlite3/embed.",
+      "files_in_mounts": ""
+    },
+    "docker_hub": {},
+    "github": {
+      "owner": "garethgeorge",
+      "repo": "backrest",
+      "description": "Backrest is a web UI and orchestrator for restic backup.",
+      "license": "GPL-3.0",
+      "homepage": "https://garethgeorge.github.io/backrest/ "
+    }
+  },
+  "entrypoint_file": "src/entrypoint.sh",
+  "platform": "x86_64",
+  "user": "1000:1000",
+  "publisher": "Moechz",
+  "compose_project": "backrestdocker",
+  "github_repo": "backrest",
+  "upstream_version": "1.14.1",
+  "release_tag_prefix": "v",
+  "version": "1.14.1-1",
+  "help": "https://github.com/Moechz/backrest/issues",
+  "official": "https://github.com/garethgeorge/backrest",
+  "license": "MIT",
+  "docker_socket": false,
+  "group_add": [],
+  "healthcheck": [
+    "CMD-SHELL",
+    "curl -s -o /dev/null http://127.0.0.1:9898/ || exit 1"
+  ],
+  "healthcheck_start_period": "45s",
+  "translations": {
+    "zh-cn": {
+      "descript": "Backrest 是 restic 的友好网页界面：把 NAS 上的目录加密备份到本地磁盘、S3、SFTP 或其他 restic 后端，支持定时计划、浏览/恢复快照与保留策略，不用手敲 restic 命令。配置与 restic 缓存都保存在应用数据目录。",
+      "important": "需要 DockerEngine（缺失时应用中心会自动安装）。打开界面后添加仓库（路径或 S3/SFTP 地址）和计划；每个仓库设置的密码是恢复时必需的，请妥善保存。配置与缓存保存在 DockerAppData/backrestdocker。备份在 NAS 上执行，目标地址需要可达。界面为纯 HTTP，暴露到公网前请配置带 TLS 的反向代理。",
+      "release_note": "1. 首个版本：基于 Docker Hub 的 Backrest 1.14.1，以非 root 容器运行。restic 备份的网页界面，支持计划、快照、恢复与保留策略；配置与缓存在应用数据目录。"
+    },
+    "zh-hk": {
+      "descript": "Backrest 是 restic 的友善網頁介面：把 NAS 上的目錄加密備份到本機磁碟、S3、SFTP 或其他 restic 後端，支援定時計畫、瀏覽/還原快照與保留策略，不用手敲 restic 指令。設定與 restic 快取都保存在應用資料目錄。",
+      "important": "需要 DockerEngine（缺少時應用中心會自動安裝）。開啟介面後新增倉庫（路徑或 S3/SFTP 位址）和計畫；每個倉庫設定的密碼是還原時必需的，請妥善保存。設定與快取保存在 DockerAppData/backrestdocker。備份在 NAS 上執行，目標位址需要可達。介面為純 HTTP，公開到互聯網前請配置帶 TLS 的反向代理。",
+      "release_note": "1. 首個版本：基於 Docker Hub 的 Backrest 1.14.1，以非 root 容器運行。restic 備份的網頁介面，支援計畫、快照、還原與保留策略；設定與快取在應用資料目錄。"
+    }
+  },
+  "data_notes": "`/config` holds `config.json` (repositories, plans, schedules); `/data` holds Backrest's cache and operation logs. The restic repositories themselves live wherever you point them.",
+  "design_notes": [
+    "**Runs as uid 1000.** Both volumes are chowned by the installer; the image needs nothing else.",
+    "**No database server.** Backrest keeps its state in a JSON config plus a bolt/JSON store in `/data`."
+  ],
+  "limitations": [
+    "- The restic repository password is not stored by TOS; keep it safe or restores are impossible.",
+    "- The UI is plain HTTP; use a TLS reverse proxy before exposing it to the internet.",
+    "- Backup destinations must be reachable from the container (S3/SFTP credentials are configured in the UI)."
+  ],
+  "host_port": 8055
+}
