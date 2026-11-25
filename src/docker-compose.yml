@@ -10,11 +10,24 @@
 # Volumes : all persistent data lives below
 #           /Volume1/DockerAppData/backrestdocker/. The /Volume* wildcard is
 #           deliberately NOT used: the platform does not expand it.
+#           Three directories are declared, because the image writes to three
+#           places: /config (config.json: repositories, plans, schedules),
+#           /data (operation log and runtime state) and /cache.
+#           /cache is NOT optional. The image's docker-entrypoint sets
+#           XDG_CACHE_HOME=/cache, so every restic command keeps its
+#           repository index cache below /cache. The image ships no /cache and
+#           a non-root process cannot rely on being allowed to create a
+#           directory in / (the review measured
+#           "unable to open cache: mkdir /cache: permission denied"), so
+#           without this mount restic aborts before it opens the repository
+#           and backup, snapshot listing and restore all return HTTP 500.
+#           The installer chowns every mounted folder to 1000:1000, so the
+#           bind mount below is what makes the cache writable.
 # TOS rules honoured: Docker Hub image with a fixed tag (never ':latest'),
 #           container_name == application id, restart: unless-stopped,
 #           non-root user, no privileged mode, no network_mode: host, no
-#           cap_add, explicit TZ, a healthcheck on the only service, and
-#           x-app-meta as the last block.
+#           cap_add, all capabilities dropped, no-new-privileges, explicit TZ,
+#           a healthcheck on the only service, and x-app-meta as the last block.
 # Escaping: docker compose interpolates ${VAR}/$VAR in compose files, so any
 #           '$' meant for the shell is written '$$'.
 #
@@ -30,13 +43,19 @@ services:
     container_name: backrestdocker
     restart: unless-stopped
     user: "1000:1000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "8055:9898"
     environment:
       TZ: "Asia/Shanghai"
+      XDG_CACHE_HOME: "/cache"
     volumes:
       - /Volume1/DockerAppData/backrestdocker/config:/config
       - /Volume1/DockerAppData/backrestdocker/data:/data
+      - /Volume1/DockerAppData/backrestdocker/cache:/cache
     healthcheck:
       test: ["CMD-SHELL", "curl -s -o /dev/null http://127.0.0.1:9898/ || exit 1"]
       interval: 30s

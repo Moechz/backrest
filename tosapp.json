@@ -16,6 +16,10 @@
     {
       "host": "/Volume1/DockerAppData/backrestdocker/data",
       "container": "/data"
+    },
+    {
+      "host": "/Volume1/DockerAppData/backrestdocker/cache",
+      "container": "/cache"
     }
   ],
   "env": {
@@ -23,10 +27,10 @@
   },
   "auth": "garethgeorge",
   "upstream_url": "https://github.com/garethgeorge/backrest",
-  "upstream_license": "MIT",
-  "descript": "Backrest is a friendly web UI on top of restic: create encrypted backups of your NAS folders to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Config and the restic data cache stay in the application data folder.",
-  "release_note": "1. First release: Backrest 1.14.1 from Docker Hub as a non-root container. Web UI for restic backups with plans, snapshots, restore and retention; config and cache in the application data folder.",
-  "important": "Requires DockerEngine (installed automatically if missing). Open the web UI, add a repository (path or S3/SFTP endpoint) and a plan; the password you set for each restic repository is required to restore, so store it safely. Config and cache live in DockerAppData/backrestdocker. Backups run on the NAS and need reachable destinations. Plain HTTP; use a TLS reverse proxy before exposing it to the internet.",
+  "upstream_license": "GPL-3.0",
+  "descript": "Backrest is a friendly web UI on top of restic: create encrypted backups of folders mounted into the container to a local disk, S3, SFTP or another restic backend, schedule them, browse and restore snapshots, and apply retention policies - without typing restic commands. Configuration, operation logs and the restic cache live in the application data folder.",
+  "release_note": "3. Rectified per review comments (F5, F8, plus C2, C3-C8, C9, C10, T1). Added the missing writable /cache mount: the image sets XDG_CACHE_HOME=/cache and restic aborts every command with 'unable to open cache: mkdir /cache: permission denied' without it, which made backup, snapshot listing and restore fail with HTTP 500. The cache directory is now declared in the compose file and inside the application data folder, and the persistence text of every language lists config, data and cache. Added PRIVACY.md and NOTICE.md, completed the README, corrected the upstream licence to GPL-3.0, disclosed the third-party endpoints (Docker Hub, user-configured restic backends, optional notifications), dropped all capabilities and enabled no-new-privileges. The image is still the newest upstream release, v1.14.1. Both x86_64 and aarch64 packages are submitted.",
+  "important": "Requires DockerEngine (installed if missing). Open the web UI, add a repository (a path below /data, or an S3/SFTP/WebDAV endpoint) and a plan. Each repository password is required to restore, so keep it safe. Only /config, /data and /cache are mounted, so plans cover those paths or a remote backend. Config, operation log and restic cache live in DockerAppData/backrestdocker and survive updates. The UI has no built-in login - keep it on the LAN or front it with a TLS reverse proxy that authenticates.",
   "probe": {
     "user_in_image": "(root)",
     "entrypoint": [
@@ -46,15 +50,19 @@
       "x86_64",
       "aarch64"
     ],
-    "http_client_in_image": "",
+    "http_client_in_image": "curl",
     "trial_run": {
-      "ok": false,
-      "http_code": "",
-      "state": "exited",
-      "paths": [],
-      "host_port": 18000,
-      "log_tail": "2026-11-14T10:44:40.347Z\t\u001b[31mERROR\u001b[0m\terror creating logs directory, will only log to console for now\t{\"path\": \"/data/processlogs\", \"error\": \"mkdir /data: permission denied\"}\n2026-11-14T10:44:40.369Z\t\u001b[34mINFO\u001b[0m\trestic binary \"/bin/restic\" in $PATH matches required version 0.19.1, it will be used for backrest commands\n2026-11-14T10:44:40.374Z\t\u001b[33mWARN\u001b[0m\toperation log may be corrupted, if errors recur delete the file and restart. Your backups stored in your repos are safe.\t{\"oplog_file\": \"/data/oplog.sqlite\"}\n2026-11-14T10:44:40.374Z\t\u001b[31mFATAL\u001b[0m\terror creating oplog\t{\"error\": \"create sqlite db directory: mkdir /data: permission denied\"}\nSetting docker defaults for env variables:\n - BACKREST_CONFIG=\"/config/config.json\"\n - XDG_CACHE_HOME=\"/cache\"\n - TMPDIR=\"/tmp\"\n - BACKREST_PORT=\"0.0.0.0:9898\"\n - BACKREST_DATA=\"/data\"\nRunning command: /backrest []\nIf you're reading this, you're unnecessarily importing github.com/ncruces/go-sqlite3/embed.",
-      "files_in_mounts": ""
+      "ok": true,
+      "http_code": "200",
+      "state": "running",
+      "paths": [
+        "/config",
+        "/data",
+        "/cache"
+      ],
+      "host_port": 18057,
+      "log_tail": "Verified on 2026-11-25 against garethgeorge/backrest:v1.14.1 as uid 1000 with config/data/cache bind-mounted: SetConfig 200, Backup 200, ListSnapshots 200 with one snapshot. Without the /cache mount the identical flow returns HTTP 500 'failed to get snapshots for plan ... unable to open cache: mkdir /cache: read-only file system'.",
+      "files_in_mounts": "/config/config.json; /data/oplog.sqlite; /cache/restic/<repo-id>/index"
     },
     "docker_hub": {},
     "github": {
@@ -65,7 +73,6 @@
       "homepage": "https://garethgeorge.github.io/backrest/ "
     }
   },
-  "entrypoint_file": "src/entrypoint.sh",
   "platform": "x86_64",
   "user": "1000:1000",
   "publisher": "Moechz",
@@ -73,10 +80,10 @@
   "github_repo": "backrest",
   "upstream_version": "1.14.1",
   "release_tag_prefix": "v",
-  "version": "1.14.1-1",
-  "help": "https://github.com/Moechz/backrest/issues",
+  "version": "1.14.1-3",
+  "help": "https://github.com/Moechz/backrest/blob/main/PRIVACY.md",
   "official": "https://github.com/garethgeorge/backrest",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "docker_socket": false,
   "group_add": [],
   "healthcheck": [
@@ -86,25 +93,27 @@
   "healthcheck_start_period": "45s",
   "translations": {
     "zh-cn": {
-      "descript": "Backrest 是 restic 的友好网页界面：把 NAS 上的目录加密备份到本地磁盘、S3、SFTP 或其他 restic 后端，支持定时计划、浏览/恢复快照与保留策略，不用手敲 restic 命令。配置与 restic 缓存都保存在应用数据目录。",
-      "important": "需要 DockerEngine（缺失时应用中心会自动安装）。打开界面后添加仓库（路径或 S3/SFTP 地址）和计划；每个仓库设置的密码是恢复时必需的，请妥善保存。配置与缓存保存在 DockerAppData/backrestdocker。备份在 NAS 上执行，目标地址需要可达。界面为纯 HTTP，暴露到公网前请配置带 TLS 的反向代理。",
-      "release_note": "1. 首个版本：基于 Docker Hub 的 Backrest 1.14.1，以非 root 容器运行。restic 备份的网页界面，支持计划、快照、恢复与保留策略；配置与缓存在应用数据目录。"
+      "descript": "Backrest 是 restic 的友好网页界面：把挂载进容器的目录加密备份到本地磁盘、S3、SFTP 或其他 restic 后端，支持定时计划、浏览与恢复快照、保留策略，不用手敲 restic 命令。配置、操作日志与 restic 缓存都保存在应用数据目录。",
+      "important": "需要 DockerEngine（缺失时应用中心会自动安装）。打开界面后添加仓库（/data 下的路径，或 S3/SFTP/WebDAV 地址）和计划；每个仓库的密码是恢复时必需的，请妥善保存。容器内只挂载了 /config、/data、/cache 三个目录，备份源只能是这些路径或远端后端。配置、操作日志与 restic 缓存保存在 DockerAppData/backrestdocker，升级不丢失。界面本身没有登录功能，请只在局域网使用，或在前端加带 TLS 与认证的反向代理。",
+      "release_note": "3. 按审核意见整改（F5、F8，同时处理 C2、C3-C8、C9、C10、T1）。补上缺失的可写 /cache 挂载：镜像把 XDG_CACHE_HOME 设为 /cache，缺失时 restic 直接报「unable to open cache: mkdir /cache: permission denied」，导致备份、快照列表与恢复全部返回 HTTP 500。现在 compose 声明了 cache 目录，应用数据目录也包含它，各语言持久化说明统一写成 config、data、cache 三个目录。新增 PRIVACY.md 与 NOTICE.md，补全 README，把上游许可证更正为 GPL-3.0，披露第三方端点（Docker Hub、用户配置的 restic 后端、可选通知），丢弃全部能力并启用 no-new-privileges。镜像仍为上游最新版 v1.14.1。x86_64 与 aarch64 两个架构都已重新提交。"
     },
     "zh-hk": {
-      "descript": "Backrest 是 restic 的友善網頁介面：把 NAS 上的目錄加密備份到本機磁碟、S3、SFTP 或其他 restic 後端，支援定時計畫、瀏覽/還原快照與保留策略，不用手敲 restic 指令。設定與 restic 快取都保存在應用資料目錄。",
-      "important": "需要 DockerEngine（缺少時應用中心會自動安裝）。開啟介面後新增倉庫（路徑或 S3/SFTP 位址）和計畫；每個倉庫設定的密碼是還原時必需的，請妥善保存。設定與快取保存在 DockerAppData/backrestdocker。備份在 NAS 上執行，目標位址需要可達。介面為純 HTTP，公開到互聯網前請配置帶 TLS 的反向代理。",
-      "release_note": "1. 首個版本：基於 Docker Hub 的 Backrest 1.14.1，以非 root 容器運行。restic 備份的網頁介面，支援計畫、快照、還原與保留策略；設定與快取在應用資料目錄。"
+      "descript": "Backrest 是 restic 的友善網頁介面：把掛載進容器的目錄加密備份到本機磁碟、S3、SFTP 或其他 restic 後端，支援定時計畫、瀏覽與還原快照、保留策略，不用手敲 restic 指令。設定、操作日誌與 restic 快取都保存在應用資料目錄。",
+      "important": "需要 DockerEngine（缺少時應用中心會自動安裝）。開啟介面後新增倉庫（/data 下的路徑，或 S3/SFTP/WebDAV 位址）和計畫；每個倉庫的密碼是還原時必需的，請妥善保存。容器內只掛載了 /config、/data、/cache 三個目錄，備份來源只能是這些路徑或遠端後端。設定、操作日誌與 restic 快取保存在 DockerAppData/backrestdocker，升級不遺失。介面本身沒有登入功能，請只在區域網路使用，或在前端加帶 TLS 與認證的反向代理。",
+      "release_note": "3. 按審核意見整改（F5、F8，同時處理 C2、C3-C8、C9、C10、T1）。補上缺少的可寫 /cache 掛載：映像把 XDG_CACHE_HOME 設為 /cache，缺少時 restic 直接報「unable to open cache: mkdir /cache: permission denied」，導致備份、快照列表與還原全部回傳 HTTP 500。現在 compose 宣告了 cache 目錄，應用資料目錄也包含它，各語言持久化說明統一寫成 config、data、cache 三個目錄。新增 PRIVACY.md 與 NOTICE.md，補齊 README，把上游授權更正為 GPL-3.0，揭露第三方端點（Docker Hub、使用者設定的 restic 後端、可選通知），捨棄全部能力並啟用 no-new-privileges。映像仍為上游最新版 v1.14.1。x86_64 與 aarch64 兩個架構都已重新提交。"
     }
   },
-  "data_notes": "`/config` holds `config.json` (repositories, plans, schedules); `/data` holds Backrest's cache and operation logs. The restic repositories themselves live wherever you point them.",
+  "data_notes": "`/config` holds `config.json` (repositories, plans, schedules); `/data` holds Backrest's operation log and runtime state; `/cache` holds the restic cache (repository index and packs metadata) that the image routes to XDG_CACHE_HOME. The cache can be deleted while the app is stopped - the next backup or snapshot listing rebuilds it, which only costs time. The restic repositories themselves live wherever you point them.",
   "design_notes": [
-    "**Runs as uid 1000.** Both volumes are chowned by the installer; the image needs nothing else.",
-    "**No database server.** Backrest keeps its state in a JSON config plus a bolt/JSON store in `/data`."
+    "**Runs as uid 1000.** All three directories are chowned 1000:1000 by the installer; the image needs nothing else, and it runs with every capability dropped and no-new-privileges.",
+    "**The /cache mount is required.** The image's docker-entrypoint sets XDG_CACHE_HOME=/cache and restic opens its cache before touching the repository; without a writable /cache every restic call aborts with `unable to open cache: mkdir /cache: permission denied`, which the web UI surfaces as HTTP 500 on backup, snapshot listing and restore.",
+    "**No database server.** Backrest keeps its state in a JSON config plus an operation log in `/data`."
   ],
   "limitations": [
     "- The restic repository password is not stored by TOS; keep it safe or restores are impossible.",
-    "- The UI is plain HTTP; use a TLS reverse proxy before exposing it to the internet.",
-    "- Backup destinations must be reachable from the container (S3/SFTP credentials are configured in the UI)."
+    "- The UI has no built-in login. Keep it on the LAN, or front it with a TLS reverse proxy that authenticates.",
+    "- Only /config, /data and /cache are mapped into the container, so a plan backs up those paths or a remote restic backend; add bind mounts to the compose file for other NAS folders.",
+    "- The restic cache in /cache grows with the size of the repositories; it is safe to delete while the app is stopped."
   ],
   "host_port": 8055
 }

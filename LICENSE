@@ -24,11 +24,16 @@ SOFTWARE.
 Third-party notices
 
 Backrest is Copyright its upstream authors and is distributed under
-MIT. This repository only packages the
-official container image `garethgeorge/backrest:v1.14.1` from Docker Hub unmodified; no
-upstream source code is distributed here. All trademarks belong to their owners.
-This is an independent community package, not affiliated with the upstream
-project or TerraMaster.
+**GPL-3.0** (https://github.com/garethgeorge/backrest, verified against the
+upstream repository and its LICENSE file; an earlier package metadata wrongly
+said MIT). This repository only packages the official container image
+`garethgeorge/backrest:v1.14.1` from Docker Hub unmodified; no upstream source
+code is distributed here. The corresponding source for that build is published
+upstream at https://github.com/garethgeorge/backrest/tree/v1.14.1.
+All trademarks belong to their owners. This is an independent community
+package, not affiliated with the upstream project or TerraMaster.
+
+See NOTICE.md for the component licences inside the image.
 
 TOSAppSelfTestingTool is an official TerraMaster utility, redistributed here
 unmodified for local package validation.
